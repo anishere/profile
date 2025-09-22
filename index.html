@@ -475,31 +475,144 @@
             50% { transform: scaleX(1.5); opacity: 1; }
         }
 
-        /* Digital rain background */
-        .digital-rain {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 0;
-            opacity: 0.2;
-            pointer-events: none;
-        }
+         /* Digital rain background */
+         .digital-rain {
+             position: absolute;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+             overflow: hidden;
+             z-index: 0;
+             opacity: 0.1;
+             pointer-events: none;
+         }
 
-        .rain-column {
-            position: absolute;
-            top: -100px;
-            font-family: 'Share Tech Mono', monospace;
-            color: var(--accent-cyan);
-            font-size: 1.2rem;
-            animation: rainFall linear infinite;
-        }
+         .rain-column {
+             position: absolute;
+             top: -100px;
+             font-family: 'Share Tech Mono', monospace;
+             color: var(--accent-cyan);
+             font-size: 1.2rem;
+             animation: rainFall linear infinite;
+         }
 
-        @keyframes rainFall {
-            to { transform: translateY(calc(100vh + 200px)); }
-        }
+         @keyframes rainFall {
+             to { transform: translateY(calc(100vh + 200px)); }
+         }
+
+         /* Disable heavy animations on mobile/tablet */
+         @media (max-width: 1024px) {
+             .rain-column {
+                 animation: none !important;
+                 position: absolute;
+                 opacity: 0.3;
+             }
+             
+             .holo-element {
+                 animation: none !important;
+                 opacity: 0.05 !important;
+             }
+             
+             .logo-icon::after {
+                 animation: none !important;
+             }
+             
+             .logo-text::after {
+                 animation: none !important;
+             }
+             
+             .glitch-effect::before,
+             .glitch-effect::after {
+                 animation: none !important;
+                 opacity: 0 !important;
+             }
+             
+             .text-glitch {
+                 animation: none !important;
+             }
+             
+             .skill-level-bar::before {
+                 animation: none !important;
+             }
+             
+             .cyber-box::after {
+                 animation: none !important;
+             }
+             
+             .scanlines {
+                 display: none !important;
+             }
+             
+             .custom-cursor,
+             .cursor-dot {
+                 display: none !important;
+             }
+             
+             /* Reduce cyber box hover effects */
+             .cyber-box:hover {
+                 transform: none !important;
+                 box-shadow: none !important;
+             }
+             
+             .cyber-corner {
+                 transition: none !important;
+             }
+             
+             .cyber-box:hover .cyber-corner {
+                 width: 8px !important;
+                 height: 8px !important;
+             }
+             
+             /* Simplify skill icons */
+             .skill-item:hover .skill-icon {
+                 transform: none !important;
+                 box-shadow: none !important;
+             }
+             
+             .skill-item:hover .skill-icon::after {
+                 animation: none !important;
+             }
+             
+             /* Remove timeline animations */
+             .timeline-item::before,
+             .timeline-item::after {
+                 transition: none !important;
+             }
+             
+             /* Simplify contact boxes */
+             .contact-box:hover .contact-box-inner {
+                 transform: none !important;
+                 box-shadow: none !important;
+             }
+             
+             .contact-box:hover i {
+                 transform: none !important;
+                 box-shadow: none !important;
+             }
+             
+             .contact-box i::after {
+                 animation: none !important;
+             }
+             
+             /* Reduce button effects */
+             .btn-cyber:hover,
+             .btn-outline:hover {
+                 transform: none !important;
+                 box-shadow: none !important;
+             }
+             
+             .btn-cyber::before,
+             .btn-outline::before {
+                 transition: none !important;
+             }
+             
+             /* Disable footer effects */
+             .footer-social a:hover {
+                 transform: none !important;
+                 box-shadow: none !important;
+             }
+         }
 
         /* Terminal typing effect */
         .terminal-text {
@@ -1790,34 +1903,58 @@
             }
         }
         
-        /* Extra small devices fixes */
-        @media (max-width: 380px) {
-            .hero-content h1 {
-                font-size: 2.2rem;
-            }
-            
-            .section-title h2 {
-                font-size: 1.8rem;
-            }
-            
-            .section-title p {
-                font-size: 1rem;
-            }
-            
-            .skills-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .contact-box {
-                margin: 0 0 15px;
-                width: 100%;
-            }
-            
-            .footer-links a {
-                margin: 0 8px 8px;
-                font-size: 0.9rem;
-            }
-        }
+         /* Extra small devices fixes */
+         @media (max-width: 380px) {
+             .hero-content h1 {
+                 font-size: 2.2rem;
+             }
+             
+             .section-title h2 {
+                 font-size: 1.8rem;
+             }
+             
+             .section-title p {
+                 font-size: 1rem;
+             }
+             
+             .skills-container {
+                 grid-template-columns: 1fr;
+             }
+             
+             .contact-box {
+                 margin: 0 0 15px;
+                 width: 100%;
+             }
+             
+             .footer-links a {
+                 margin: 0 8px 8px;
+                 font-size: 0.9rem;
+             }
+         }
+         
+         /* Respect user motion preferences */
+         @media (prefers-reduced-motion: reduce) {
+             * {
+                 animation-duration: 0.01ms !important;
+                 animation-iteration-count: 1 !important;
+                 transition-duration: 0.01ms !important;
+                 scroll-behavior: auto !important;
+             }
+             
+             .rain-column,
+             .holo-element,
+             .glitch-effect::before,
+             .glitch-effect::after,
+             .text-glitch,
+             .skill-level-bar::before,
+             .cyber-box::after {
+                 animation: none !important;
+             }
+             
+             .scanlines {
+                 display: none !important;
+             }
+         }
     </style>
 </head>
 <body>
@@ -2584,14 +2721,21 @@
                 });
             }
             
-            // Initialize AOS with refined settings
-            AOS.init({
-                duration: 800,
-                easing: 'ease-out',
-                once: true,
-                offset: 50,
-                disable: 'mobile'
-            });
+             // Initialize AOS with optimized settings for performance
+             const isMobileOrTablet = window.innerWidth <= 1024;
+             
+             AOS.init({
+                 duration: isMobileOrTablet ? 400 : 800,
+                 easing: 'ease-out',
+                 once: true,
+                 offset: isMobileOrTablet ? 20 : 50,
+                 disable: function() {
+                     return window.innerWidth < 768;
+                 },
+                 // Reduce animations on mobile/tablet
+                 throttleDelay: isMobileOrTablet ? 200 : 99,
+                 debounceDelay: isMobileOrTablet ? 100 : 50
+             });
             
             // Terminal Loader Animation
             const loaderOutputLines = document.querySelectorAll('.loader-output-line');
@@ -2622,23 +2766,34 @@
                 }, 3000);
             }, 500);
             
-            // Main page animations
-            function initPageAnimations() {
-                // Initialize GSAP and ScrollTrigger
-                initGSAPAnimations();
-                
-                // Initialize digital rain effect
-                initDigitalRain();
-                
-                // Initialize particles
-                initParticles();
-                
-                // Initialize typing effect
-                initTypingEffect();
-                
-                // Initialize skill bars
-                initSkillBars();
-            }
+             // Main page animations
+             function initPageAnimations() {
+                 const isDesktop = window.innerWidth > 1024;
+                 
+                 // Initialize GSAP and ScrollTrigger
+                 if (isDesktop) {
+                     initGSAPAnimations();
+                 }
+                 
+                 // Initialize digital rain effect only on desktop
+                 if (isDesktop) {
+                     initDigitalRain();
+                 } else {
+                     // Static rain for mobile/tablet
+                     initStaticDigitalRain();
+                 }
+                 
+                 // Initialize particles only on desktop
+                 if (isDesktop) {
+                     initParticles();
+                 }
+                 
+                 // Initialize typing effect (lightweight)
+                 initTypingEffect();
+                 
+                 // Initialize skill bars
+                 initSkillBars();
+             }
             
             // Initialize GSAP animations
             function initGSAPAnimations() {
@@ -2671,31 +2826,57 @@
                 });
             }
             
-            // Initialize Digital Rain
-            function initDigitalRain() {
-                const digitalRain = document.getElementById('digital-rain');
-                if (!digitalRain) return;
-                
-                const characters = '01100101010111101010101110101010111010010101010110101010';
-                const columns = Math.floor(window.innerWidth / 20);
-                
-                for (let i = 0; i < columns; i++) {
-                    const column = document.createElement('div');
-                    column.className = 'rain-column';
-                    column.style.left = (i * 20) + 'px';
-                    column.style.animationDuration = 3 + Math.random() * 8 + 's';
-                    column.style.animationDelay = Math.random() * 5 + 's';
-                    
-                    let columnText = '';
-                    const length = 5 + Math.floor(Math.random() * 15);
-                    for (let j = 0; j < length; j++) {
-                        columnText += characters.charAt(Math.floor(Math.random() * characters.length)) + '<br>';
-                    }
-                    
-                    column.innerHTML = columnText;
-                    digitalRain.appendChild(column);
-                }
-            }
+             // Initialize Digital Rain (Desktop only)
+             function initDigitalRain() {
+                 const digitalRain = document.getElementById('digital-rain');
+                 if (!digitalRain) return;
+                 
+                 const characters = '01100101010111101010101110101010111010010101010110101010';
+                 const columns = Math.floor(window.innerWidth / 20);
+                 
+                 for (let i = 0; i < columns; i++) {
+                     const column = document.createElement('div');
+                     column.className = 'rain-column';
+                     column.style.left = (i * 20) + 'px';
+                     column.style.animationDuration = 3 + Math.random() * 8 + 's';
+                     column.style.animationDelay = Math.random() * 5 + 's';
+                     
+                     let columnText = '';
+                     const length = 5 + Math.floor(Math.random() * 15);
+                     for (let j = 0; j < length; j++) {
+                         columnText += characters.charAt(Math.floor(Math.random() * characters.length)) + '<br>';
+                     }
+                     
+                     column.innerHTML = columnText;
+                     digitalRain.appendChild(column);
+                 }
+             }
+             
+             // Initialize Static Digital Rain (Mobile/Tablet)
+             function initStaticDigitalRain() {
+                 const digitalRain = document.getElementById('digital-rain');
+                 if (!digitalRain) return;
+                 
+                 const characters = '01100101010111101010101110101010111010010101010110101010';
+                 const columns = Math.floor(window.innerWidth / 30); // Fewer columns for performance
+                 
+                 for (let i = 0; i < columns; i++) {
+                     const column = document.createElement('div');
+                     column.className = 'rain-column';
+                     column.style.left = (i * 30) + 'px';
+                     column.style.top = Math.random() * window.innerHeight + 'px';
+                     // No animation for mobile/tablet
+                     
+                     let columnText = '';
+                     const length = 3 + Math.floor(Math.random() * 8); // Shorter columns
+                     for (let j = 0; j < length; j++) {
+                         columnText += characters.charAt(Math.floor(Math.random() * characters.length)) + '<br>';
+                     }
+                     
+                     column.innerHTML = columnText;
+                     digitalRain.appendChild(column);
+                 }
+             }
             
             // Initialize Particles
             function initParticles() {
@@ -3025,12 +3206,12 @@
                 });
             }
             
-            // Initialize Three.js effects if window width > 768
-            if (window.innerWidth > 768) {
-                setTimeout(() => {
-                    initThreeJsBackground();
-                }, 4000);
-            }
+             // Initialize Three.js effects only on desktop
+             if (window.innerWidth > 1024) {
+                 setTimeout(() => {
+                     initThreeJsBackground();
+                 }, 4000);
+             }
             
             // Glitch text effect initialization
             setTimeout(() => {
