@@ -475,31 +475,31 @@
             50% { transform: scaleX(1.5); opacity: 1; }
         }
 
-         /* Digital rain background */
-         .digital-rain {
-             position: absolute;
-             top: 0;
-             left: 0;
-             width: 100%;
-             height: 100%;
-             overflow: hidden;
-             z-index: 0;
+        /* Digital rain background */
+        .digital-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
              opacity: 0.1;
-             pointer-events: none;
-         }
+            pointer-events: none;
+        }
 
-         .rain-column {
-             position: absolute;
-             top: -100px;
-             font-family: 'Share Tech Mono', monospace;
-             color: var(--accent-cyan);
-             font-size: 1.2rem;
-             animation: rainFall linear infinite;
-         }
+        .rain-column {
+            position: absolute;
+            top: -100px;
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--accent-cyan);
+            font-size: 1.2rem;
+            animation: rainFall linear infinite;
+        }
 
-         @keyframes rainFall {
-             to { transform: translateY(calc(100vh + 200px)); }
-         }
+        @keyframes rainFall {
+            to { transform: translateY(calc(100vh + 200px)); }
+        }
 
          /* Disable heavy animations on mobile/tablet */
          @media (max-width: 1024px) {
@@ -610,6 +610,27 @@
              /* Disable footer effects */
              .footer-social a:hover {
                  transform: none !important;
+                 box-shadow: none !important;
+             }
+             
+             /* Simplify certificate effects */
+             .certificate-item:hover {
+                 transform: none !important;
+                 box-shadow: none !important;
+             }
+             
+             .certificate-img:hover {
+                 transform: none !important;
+                 box-shadow: none !important;
+             }
+             
+             .certificate-item:hover::before {
+                 opacity: 0 !important;
+             }
+
+             /* Keep modal navigation functional on mobile */
+             .modal-nav:hover {
+                 transform: translateY(-50%) scale(1) !important;
                  box-shadow: none !important;
              }
          }
@@ -1225,6 +1246,246 @@
         .timeline-item:hover .timeline-date {
             background: rgba(0, 255, 213, 0.2);
             box-shadow: 0 0 10px var(--accent-cyan-glow);
+        }
+
+        /* Certificate section enhancements */
+        .certificate-item {
+            position: relative;
+            text-align: center;
+            transition: var(--transition);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            background: rgba(0, 255, 213, 0.02);
+            border: 1px solid rgba(0, 255, 213, 0.1);
+            overflow: hidden;
+        }
+
+        .certificate-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 255, 213, 0.05), rgba(0, 132, 255, 0.05));
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 1;
+        }
+
+        .certificate-item:hover::before {
+            opacity: 1;
+        }
+
+        .certificate-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 20px var(--accent-cyan-glow);
+            border-color: var(--accent-cyan);
+        }
+
+        .certificate-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            position: relative;
+            z-index: 2;
+            border: 2px solid rgba(0, 255, 213, 0.2);
+            cursor: pointer;
+        }
+
+        .certificate-img:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 15px var(--accent-cyan-glow);
+        }
+
+        .certificate-title {
+            margin-top: 15px;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            font-weight: 500;
+            font-family: 'Rajdhani', sans-serif;
+            position: relative;
+            z-index: 2;
+            transition: var(--transition);
+        }
+
+        .certificate-item:hover .certificate-title {
+            color: var(--accent-cyan);
+        }
+
+        /* Certificate modal styles */
+        .certificate-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .certificate-modal-content {
+            position: relative;
+            margin: 5% auto;
+            max-width: 90%;
+            max-height: 90%;
+            text-align: center;
+        }
+
+        .certificate-modal img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: var(--border-radius);
+            border: 2px solid var(--accent-cyan);
+            box-shadow: 0 0 30px var(--accent-cyan-glow);
+        }
+
+        .certificate-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: var(--text-light);
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(227, 27, 84, 0.2);
+            border-radius: 50%;
+            border: 1px solid var(--accent-red);
+        }
+
+        .certificate-close:hover {
+            background: var(--accent-red);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* Modal navigation buttons */
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 255, 213, 0.2);
+            border: 2px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 1001;
+        }
+
+        .modal-prev {
+            left: 20px;
+        }
+
+        .modal-next {
+            right: 20px;
+        }
+
+        .modal-nav:hover {
+            background: var(--accent-cyan);
+            color: var(--primary-bg);
+            box-shadow: 0 0 20px var(--accent-cyan-glow);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .modal-nav:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .modal-nav:disabled:hover {
+            transform: translateY(-50%) scale(1);
+            box-shadow: none;
+        }
+
+        /* Modal counter */
+        .modal-counter {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-light);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--accent-cyan);
+        }
+
+        /* Certificate section responsive */
+        @media (max-width: 768px) {
+            .certificate-img {
+                height: 250px;
+            }
+            
+            .certificate-title {
+                font-size: 1rem;
+            }
+
+            .modal-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .modal-prev {
+                left: 10px;
+            }
+
+            .modal-next {
+                right: 10px;
+            }
+
+            .modal-counter {
+                bottom: -40px;
+                font-size: 0.9rem;
+                padding: 6px 12px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .certificate-img {
+                height: 200px;
+            }
+            
+            .certificate-item {
+                padding: 10px;
+            }
+
+            .modal-nav {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+
+            .modal-prev {
+                left: 5px;
+            }
+
+            .modal-next {
+                right: 5px;
+            }
         }
 
         /* Contact section enhancements */
@@ -1903,34 +2164,34 @@
             }
         }
         
-         /* Extra small devices fixes */
-         @media (max-width: 380px) {
-             .hero-content h1 {
-                 font-size: 2.2rem;
-             }
-             
-             .section-title h2 {
-                 font-size: 1.8rem;
-             }
-             
-             .section-title p {
-                 font-size: 1rem;
-             }
-             
-             .skills-container {
-                 grid-template-columns: 1fr;
-             }
-             
-             .contact-box {
-                 margin: 0 0 15px;
-                 width: 100%;
-             }
-             
-             .footer-links a {
-                 margin: 0 8px 8px;
-                 font-size: 0.9rem;
-             }
-         }
+        /* Extra small devices fixes */
+        @media (max-width: 380px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title p {
+                font-size: 1rem;
+            }
+            
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-box {
+                margin: 0 0 15px;
+                width: 100%;
+            }
+            
+            .footer-links a {
+                margin: 0 8px 8px;
+                font-size: 0.9rem;
+            }
+        }
          
          /* Respect user motion preferences */
          @media (prefers-reduced-motion: reduce) {
@@ -2016,6 +2277,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#resume" data-text="Resume">Resume</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#certificates" data-text="Certificates">Certificates</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact" data-text="Contact">Contact</a>
@@ -2205,10 +2469,10 @@
                         <div class="skill-title">Python</div>
                         <div class="skill-percentage">
                             <div>Proficiency</div>
-                            <span>95%</span>
+                            <span>90%</span>
                         </div>
                         <div class="skill-level">
-                            <div class="skill-level-bar" data-width="95%"></div>
+                            <div class="skill-level-bar" data-width="90%"></div>
                         </div>
                     </div>
                 </div>
@@ -2249,10 +2513,10 @@
                         <div class="skill-title">Web Technologies</div>
                         <div class="skill-percentage">
                             <div>HTML, CSS, JavaScript</div>
-                            <span>85%</span>
+                            <span>95%</span>
                         </div>
                         <div class="skill-level">
-                            <div class="skill-level-bar" data-width="85%"></div>
+                            <div class="skill-level-bar" data-width="95%"></div>
                         </div>
                     </div>
                 </div>
@@ -2293,10 +2557,10 @@
                         <div class="skill-title">ReactJS</div>
                         <div class="skill-percentage">
                             <div>Proficiency</div>
-                            <span>85%</span>
+                            <span>90%</span>
                         </div>
                         <div class="skill-level">
-                            <div class="skill-level-bar" data-width="85%"></div>
+                            <div class="skill-level-bar" data-width="90%"></div>
                         </div>
                     </div>
                 </div>
@@ -2552,10 +2816,164 @@
                                             <p style="margin-bottom: 5px; font-size: 0.9rem;">• <a href="https://bannerblitz.adhigtechn.com" target="_blank" style="color: var(--accent-cyan);">bannerblitz.adhigtechn.com</a> - AI banner generation tool</p>
                                             <p style="margin-bottom: 5px; font-size: 0.9rem;">• <a href="https://panelhaiviet.com" target="_blank" style="color: var(--accent-cyan);">panelhaiviet.com</a> - E-commerce platform</p>
                                             <p style="margin-bottom: 0; font-size: 0.9rem;">• <a href="https://panelmiennam.vn" target="_blank" style="color: var(--accent-cyan);">panelmiennam.vn</a> - Business website</p>
-                                        </div>
+                                    </div>
                                         
                                         <p style="margin-top: 10px; font-size: 0.9rem;">Built end-to-end automation systems for e-commerce data monitoring, ML models based on Monash University datasets, educational tools for Bloom's taxonomy questions, and multi-agent LLMs for Vietnamese text rendering (>80% accuracy).</p>
                                         <p style="margin-top: 5px; font-size: 0.85rem; color: var(--text-muted);">Tech stack: LangChain, RAG, Python, FastAPI, ReactJS, RESTful API, Docker, MySQL, WordPress.</p>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terminal Section Divider -->
+    <div class="terminal-divider">
+        <div class="terminal-line"></div>
+        <div class="terminal-commands">ls ./certificates/</div>
+    </div>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="certificates section">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2 class="glitch-effect" data-text="My Certificates">My Certificates</h2>
+                <p>Educational achievements and professional certifications throughout my journey.</p>
+            </div>
+
+            <!-- University Section -->
+            <div class="row mb-5">
+                <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
+                    <div class="cyber-box">
+                        <div class="cyber-box-inner">
+                            <div class="cyber-box-corners">
+                                <div class="cyber-corner corner-tl"></div>
+                                <div class="cyber-corner corner-tr"></div>
+                                <div class="cyber-corner corner-bl"></div>
+                                <div class="cyber-corner corner-br"></div>
+                            </div>
+                            <h3 style="color: var(--accent-cyan); margin-bottom: 30px; text-align: center; font-family: 'Orbitron', sans-serif;">
+                                <i class="fas fa-graduation-cap" style="margin-right: 10px;"></i>University - Bachelor Degree
+                            </h3>
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="certificate-item">
+                                        <img src="dh/dh1.jpg" alt="University Certificate" class="certificate-img" data-aos="zoom-in">
+                                        <p class="certificate-title">Bachelor of Information Technology Degree</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="certificate-item">
+                                        <img src="dh/bangdiem1.jpg" alt="University Transcript 1" class="certificate-img" data-aos="zoom-in" data-aos-delay="100">
+                                        <p class="certificate-title">Academic Transcript - Year 1-2</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="certificate-item">
+                                        <img src="dh/bangdiem2.jpg" alt="University Transcript 2" class="certificate-img" data-aos="zoom-in" data-aos-delay="200">
+                                        <p class="certificate-title">Academic Transcript - Year 3-4</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="certificate-item">
+                                        <img src="dh/bangdiem3.jpg" alt="University Transcript 3" class="certificate-img" data-aos="zoom-in" data-aos-delay="300">
+                                        <p class="certificate-title">Final Academic Transcript</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vocational Section -->
+            <div class="row mb-5">
+                <div class="col-lg-12" data-aos="fade-up" data-aos-delay="200">
+                    <div class="cyber-box">
+                        <div class="cyber-box-inner">
+                            <div class="cyber-box-corners">
+                                <div class="cyber-corner corner-tl"></div>
+                                <div class="cyber-corner corner-tr"></div>
+                                <div class="cyber-corner corner-bl"></div>
+                                <div class="cyber-corner corner-br"></div>
+                            </div>
+                            <h3 style="color: var(--accent-cyan); margin-bottom: 30px; text-align: center; font-family: 'Orbitron', sans-serif;">
+                                <i class="fas fa-tools" style="margin-right: 10px;"></i>Vocational College - Technical Certificate
+                            </h3>
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="certificate-item">
+                                        <img src="trungcap/trungcap1.jpg" alt="Vocational Certificate" class="certificate-img" data-aos="zoom-in">
+                                        <p class="certificate-title">Computer Repair and Assembly Certificate</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="certificate-item">
+                                        <img src="trungcap/tc_bangdiem1.jpg" alt="Vocational Transcript 1" class="certificate-img" data-aos="zoom-in" data-aos-delay="100">
+                                        <p class="certificate-title">Vocational Transcript - Semester 1-2</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="certificate-item">
+                                        <img src="trungcap/tc_bangdiem2.jpg" alt="Vocational Transcript 2" class="certificate-img" data-aos="zoom-in" data-aos-delay="200">
+                                        <p class="certificate-title">Vocational Transcript - Final</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- IT Certificates Section -->
+            <div class="row mb-5">
+                <div class="col-lg-12" data-aos="fade-up" data-aos-delay="300">
+                    <div class="cyber-box">
+                        <div class="cyber-box-inner">
+                            <div class="cyber-box-corners">
+                                <div class="cyber-corner corner-tl"></div>
+                                <div class="cyber-corner corner-tr"></div>
+                                <div class="cyber-corner corner-bl"></div>
+                                <div class="cyber-corner corner-br"></div>
+                            </div>
+                            <h3 style="color: var(--accent-cyan); margin-bottom: 30px; text-align: center; font-family: 'Orbitron', sans-serif;">
+                                <i class="fas fa-laptop-code" style="margin-right: 10px;"></i>Certificates
+                            </h3>
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="certificate-item">
+                                        <img src="chungchi/chungchi_cntt_1.jpg" alt="IT Basic Certificate" class="certificate-img" data-aos="zoom-in">
+                                        <p class="certificate-title">Basic Information Technology Certificate</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other Certificates Section -->
+            <div class="row mb-5">
+                <div class="col-lg-12" data-aos="fade-up" data-aos-delay="400">
+                    <div class="cyber-box">
+                        <div class="cyber-box-inner">
+                            <div class="cyber-box-corners">
+                                <div class="cyber-corner corner-tl"></div>
+                                <div class="cyber-corner corner-tr"></div>
+                                <div class="cyber-corner corner-bl"></div>
+                                <div class="cyber-corner corner-br"></div>
+                            </div>
+                            <h3 style="color: var(--accent-cyan); margin-bottom: 30px; text-align: center; font-family: 'Orbitron', sans-serif;">
+                                <i class="fas fa-award" style="margin-right: 10px;"></i>Other Certificates
+                            </h3>
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="certificate-item">
+                                        <img src="khac/b2_1.jpg" alt="B2 English Certificate" class="certificate-img" data-aos="zoom-in">
+                                        <p class="certificate-title">English B2 Level Certificate</p>
                                     </div>
                                 </div>
                             </div>
@@ -2649,6 +3067,23 @@
         </div>
     </section>
 
+    <!-- Certificate Modal -->
+    <div id="certificateModal" class="certificate-modal">
+        <div class="certificate-modal-content">
+            <span class="certificate-close">&times;</span>
+            <button class="modal-nav modal-prev" id="modalPrev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="modal-nav modal-next" id="modalNext">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <img id="modalImage" src="" alt="Certificate">
+            <div class="modal-counter">
+                <span id="currentImageIndex">1</span> / <span id="totalImages">1</span>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -2665,6 +3100,7 @@
                     <a href="#about">About</a>
                     <a href="#skills">Skills</a>
                     <a href="#resume">Resume</a>
+                    <a href="#certificates">Certificates</a>
                     <a href="#contact">Contact</a>
                 </div>
                 <div class="copyright">
@@ -2724,10 +3160,10 @@
              // Initialize AOS with optimized settings for performance
              const isMobileOrTablet = window.innerWidth <= 1024;
              
-             AOS.init({
+            AOS.init({
                  duration: isMobileOrTablet ? 400 : 800,
-                 easing: 'ease-out',
-                 once: true,
+                easing: 'ease-out',
+                once: true,
                  offset: isMobileOrTablet ? 20 : 50,
                  disable: function() {
                      return window.innerWidth < 768;
@@ -2735,7 +3171,7 @@
                  // Reduce animations on mobile/tablet
                  throttleDelay: isMobileOrTablet ? 200 : 99,
                  debounceDelay: isMobileOrTablet ? 100 : 50
-             });
+            });
             
             // Terminal Loader Animation
             const loaderOutputLines = document.querySelectorAll('.loader-output-line');
@@ -2766,34 +3202,34 @@
                 }, 3000);
             }, 500);
             
-             // Main page animations
-             function initPageAnimations() {
+            // Main page animations
+            function initPageAnimations() {
                  const isDesktop = window.innerWidth > 1024;
                  
-                 // Initialize GSAP and ScrollTrigger
+                // Initialize GSAP and ScrollTrigger
                  if (isDesktop) {
-                     initGSAPAnimations();
+                initGSAPAnimations();
                  }
-                 
+                
                  // Initialize digital rain effect only on desktop
                  if (isDesktop) {
-                     initDigitalRain();
+                initDigitalRain();
                  } else {
                      // Static rain for mobile/tablet
                      initStaticDigitalRain();
                  }
-                 
+                
                  // Initialize particles only on desktop
                  if (isDesktop) {
-                     initParticles();
+                initParticles();
                  }
-                 
+                
                  // Initialize typing effect (lightweight)
-                 initTypingEffect();
-                 
-                 // Initialize skill bars
-                 initSkillBars();
-             }
+                initTypingEffect();
+                
+                // Initialize skill bars
+                initSkillBars();
+            }
             
             // Initialize GSAP animations
             function initGSAPAnimations() {
@@ -2827,30 +3263,30 @@
             }
             
              // Initialize Digital Rain (Desktop only)
-             function initDigitalRain() {
-                 const digitalRain = document.getElementById('digital-rain');
-                 if (!digitalRain) return;
-                 
-                 const characters = '01100101010111101010101110101010111010010101010110101010';
-                 const columns = Math.floor(window.innerWidth / 20);
-                 
-                 for (let i = 0; i < columns; i++) {
-                     const column = document.createElement('div');
-                     column.className = 'rain-column';
-                     column.style.left = (i * 20) + 'px';
-                     column.style.animationDuration = 3 + Math.random() * 8 + 's';
-                     column.style.animationDelay = Math.random() * 5 + 's';
-                     
-                     let columnText = '';
-                     const length = 5 + Math.floor(Math.random() * 15);
-                     for (let j = 0; j < length; j++) {
-                         columnText += characters.charAt(Math.floor(Math.random() * characters.length)) + '<br>';
-                     }
-                     
-                     column.innerHTML = columnText;
-                     digitalRain.appendChild(column);
-                 }
-             }
+            function initDigitalRain() {
+                const digitalRain = document.getElementById('digital-rain');
+                if (!digitalRain) return;
+                
+                const characters = '01100101010111101010101110101010111010010101010110101010';
+                const columns = Math.floor(window.innerWidth / 20);
+                
+                for (let i = 0; i < columns; i++) {
+                    const column = document.createElement('div');
+                    column.className = 'rain-column';
+                    column.style.left = (i * 20) + 'px';
+                    column.style.animationDuration = 3 + Math.random() * 8 + 's';
+                    column.style.animationDelay = Math.random() * 5 + 's';
+                    
+                    let columnText = '';
+                    const length = 5 + Math.floor(Math.random() * 15);
+                    for (let j = 0; j < length; j++) {
+                        columnText += characters.charAt(Math.floor(Math.random() * characters.length)) + '<br>';
+                    }
+                    
+                    column.innerHTML = columnText;
+                    digitalRain.appendChild(column);
+                }
+            }
              
              // Initialize Static Digital Rain (Mobile/Tablet)
              function initStaticDigitalRain() {
@@ -3208,10 +3644,10 @@
             
              // Initialize Three.js effects only on desktop
              if (window.innerWidth > 1024) {
-                 setTimeout(() => {
-                     initThreeJsBackground();
-                 }, 4000);
-             }
+                setTimeout(() => {
+                    initThreeJsBackground();
+                }, 4000);
+            }
             
             // Glitch text effect initialization
             setTimeout(() => {
@@ -3221,6 +3657,110 @@
                     text.setAttribute('data-text', content);
                 });
             }, 1000);
+
+            // Certificate modal functionality with navigation
+            const modal = document.getElementById('certificateModal');
+            const modalImg = document.getElementById('modalImage');
+            const closeBtn = document.querySelector('.certificate-close');
+            const prevBtn = document.getElementById('modalPrev');
+            const nextBtn = document.getElementById('modalNext');
+            const currentIndexSpan = document.getElementById('currentImageIndex');
+            const totalImagesSpan = document.getElementById('totalImages');
+            const images = document.querySelectorAll('.certificate-img');
+            
+            let currentImageIndex = 0;
+            let imageList = Array.from(images);
+
+            // Update modal display
+            function updateModal() {
+                const currentImg = imageList[currentImageIndex];
+                modalImg.src = currentImg.src;
+                modalImg.alt = currentImg.alt;
+                currentIndexSpan.textContent = currentImageIndex + 1;
+                totalImagesSpan.textContent = imageList.length;
+                
+                // Update button states
+                prevBtn.disabled = currentImageIndex === 0;
+                nextBtn.disabled = currentImageIndex === imageList.length - 1;
+            }
+
+            // Show modal
+            function showModal(clickedIndex) {
+                currentImageIndex = clickedIndex;
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                updateModal();
+            }
+
+            // Navigate to previous image
+            function showPrevImage() {
+                if (currentImageIndex > 0) {
+                    currentImageIndex--;
+                    updateModal();
+                }
+            }
+
+            // Navigate to next image
+            function showNextImage() {
+                if (currentImageIndex < imageList.length - 1) {
+                    currentImageIndex++;
+                    updateModal();
+                }
+            }
+
+            // Close modal
+            function closeModal() {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Restore scrolling
+            }
+
+            // Add click event to all certificate images
+            images.forEach((img, index) => {
+                img.addEventListener('click', function() {
+                    showModal(index);
+                });
+            });
+
+            // Close modal when clicking the close button
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeModal);
+            }
+
+            // Navigation button events
+            if (prevBtn) {
+                prevBtn.addEventListener('click', showPrevImage);
+            }
+            
+            if (nextBtn) {
+                nextBtn.addEventListener('click', showNextImage);
+            }
+
+            // Close modal when clicking outside the image
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (modal.style.display === 'block') {
+                    switch(e.key) {
+                        case 'ArrowLeft':
+                            e.preventDefault();
+                            showPrevImage();
+                            break;
+                        case 'ArrowRight':
+                            e.preventDefault();
+                            showNextImage();
+                            break;
+                        case 'Escape':
+                            e.preventDefault();
+                            closeModal();
+                            break;
+                    }
+                }
+            });
         });
         
         // Check if element is in viewport - function definition outside DOMContentLoaded
